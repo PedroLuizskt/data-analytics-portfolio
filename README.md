@@ -239,3 +239,112 @@ Com este painel, o RH deixa de ser reativo e passa a ser preditivo. Ao cruzar o 
 </div>
 
 ---
+
+### 🚛 Projeto 04: Logistics Analytics e Refatoração de Dashboards (Troubleshooting)
+**Arquivos:** [`Dashboard (.pbix)`](./Projeto04/Projeto04.pbix)
+
+Este projeto traz uma abordagem incrivelmente realista e requisitada no mercado de trabalho: a **Auditoria e Refatoração de Projetos**. Em vez de construir do zero, o desafio foi receber um painel logístico herdado, repleto de más práticas de visualização e erros de cálculo, desconstruí-lo completamente e entregar uma solução sob os mais altos padrões de rigor analítico e design da informação.
+
+
+
+**1. Contexto de Negócio**
+A diretoria de *Supply Chain* (Cadeia de Suprimentos) de uma empresa de logística encomendou um painel para monitorar o status das entregas. O material entregue inicialmente estava confuso, induzia o usuário ao erro e falhava em destacar os gargalos. O objetivo foi atuar como um consultor interno: auditar os dados, justificar tecnicamente o *porquê* de a versão anterior estar errada e reconstruir a solução para que os gestores pudessem focar no que importa: prazos, atrasos e performance de equipes.
+
+**2. Conceito Teórico Essencial**
+* **Data Visualization & Carga Cognitiva:** Aplicação dos princípios de Edward Tufte (maximização do *Data-Ink Ratio*, ou seja, remover a poluição visual e focar na informação) e uso das leis da Gestalt para reduzir o esforço mental do usuário ao ler o dashboard.
+* **Métricas de Nível de Serviço Logístico (SLA):** Em logística, rastreamos o desempenho através de indicadores estritos de conformidade. A proporção de entregas feitas dentro do prazo é o OTD (*On-Time Delivery*), modelado estatisticamente como:
+  $$OTD = \frac{\sum Entregas\ no\ Prazo}{\sum Total\ de\ Entregas}$$
+* **Auditoria de Dados (Data Auditing):** Investigação de falhas de agregação (como somar valores que deveriam ser médias) e uso incorreto de filtros implícitos.
+
+**3. Aplicação Prática no Power BI**
+* **Análise Crítica (Diagnóstico):** Mapeamento dos erros da versão original, como o uso indiscriminado de gráficos de pizza para muitas categorias (o que distorce a percepção de proporção), falta de ordenação (sort) e poluição de cores.
+* **Desenvolvimento de KPIs de Precisão:**
+  * **SLA de Canal:** Total de Entregas no Prazo fatiado por Canal de Entrega.
+  * **Eficiência Operacional:** Percentual de Entregas Antecipadas por Equipe de Entrega.
+  * **Análise de Tendência:** Total de Entregas por Mês (utilizando *Time Intelligence*).
+  * **Filtros Avançados (Top N):** Configuração de filtro dinâmico no painel lateral para isolar as entregas apenas dos Top 5 Vendedores.
+  * **Mapeamento de Gargalos:** Identificação de Entregas com Atraso por Cidade, usando gráficos de barras horizontais ordenados para facilitar a leitura.
+  * **Visão Macro:** Percentual de Entregas segmentado de forma clara por Status.
+* **Reconstrução de UI/UX:** Implementação de uma paleta de cores semântica (vermelho para atrasos, verde para antecipações, cores neutras para o contexto geral), alinhamento de grades (grids) e tipografia hierárquica.
+
+**4. Insight Analítico Gerado**
+A refatoração transformou um relatório inútil em uma **Torre de Controle Logístico**. Ao consertar os eixos e as métricas, os diretores agora não precisam adivinhar os números; eles identificam imediatamente quais cidades exigem intervenção de frota (devido aos atrasos) e quais equipes merecem bonificação pelo alto índice de entregas antecipadas. O projeto não apenas gerou gráficos bonitos, mas protegeu a empresa de tomar decisões operacionais catastróficas baseadas em dados mal interpretados.
+
+#### 📸 O Poder da Refatoração (Antes vs. Depois)
+
+<table align="center">
+  <tr>
+    <td align="center"><strong>❌ Versão Original (Com Erros de UX/UI e Modelagem)</strong><br><img src="./Projeto04/Projeto04Versaosemcorrecao.png" alt="Dashboard Original com Erros" width="100%"></td>
+    <td align="center"><strong>✅ Versão Refatorada (Padrão Profissional e Analítico)</strong><br><img src="./Projeto04/Projeto04.png" alt="Dashboard Refatorado" width="100%"></td>
+  </tr>
+</table>
+
+---
+
+### 📈 Projeto 05: Financial Analytics corporativo (FP&A) e Análise de Variância
+**Arquivos:** [`Dashboard (.pbix)`](./Projeto05/Projeto05.pbix) | [`Visualização do Dashboard (.png)`](./Projeto05/Projeto05.png)
+
+Neste projeto, aprofundamos o uso do Power BI no departamento de Controladoria e Planejamento Financeiro (FP&A). O objetivo é construir uma visão gerencial de Receitas e Despesas (semelhante a um DRE gerencial), focando não apenas em totais absolutos, mas em comparações de baseline (médias) e desdobramento hierárquico para dar suporte ao Plano Estratégico da empresa.
+
+
+
+**1. Contexto de Negócio**
+A diretoria financeira (CFO) quer ir além do simples fechamento contábil. Para traçar o plano estratégico do próximo ano, a liderança precisa responder a perguntas críticas: **Nossas despesas estão sob controle em relação à nossa média histórica? Quais componentes exatos estão corroendo nossa Margem de Lucro?** O painel precisa identificar cirurgicamente os extremos (maiores e menores segmentos) para direcionar cortes de custos ou alocação de investimentos.
+
+**2. Conceito Teórico Essencial**
+* **Análise de Variância (Variance Analysis):** A prática de comparar o desempenho atual contra um *baseline* (como uma média histórica, orçamento ou meta) para identificar desvios operacionais.
+* **Rentabilidade (Profitability):** Modelagem matemática da eficiência do negócio. A margem é calculada dinamicamente via DAX:
+  $$Margem\ de\ Lucro\ (\%) = \frac{\sum Receitas - \sum Despesas}{\sum Receitas}$$
+* **Estrutura de Dados Hierárquica:** Organização de categorias financeiras em níveis (ex: Nível 1: Tipo -> Nível 2: Componente), permitindo o aprofundamento analítico (Drill-down).
+
+**3. Aplicação Prática no Power BI**
+* **Desenvolvimento de KPIs Financeiros:** Criação de cartões (*Cards*) de alto impacto visual para os indicadores primários: Total de Receitas, Total de Despesas e Margem de Lucro.
+* **Composição de Receita:** Gráficos de distribuição para isolar o Total de Receitas por Componente, evidenciando o Princípio de Pareto (quais componentes trazem mais dinheiro).
+* **Benchmarking Interno (Despesa vs. Média):** Implementação de visuais comparativos cruzando o Total de Despesas por Componente diretamente com a Média Global de Despesas. Isso cria uma "linha de corte" visual instantânea para anomalias.
+* **Navegação Multidimensional (Drill-down):** Configuração de matrizes ou gráficos de barras suportando a hierarquia contábil (`Tipo > Componente`), cruzando essa estrutura com o eixo temporal (Ano) para análise de tendências de longo prazo.
+* **Identificação de Extremos (Top/Bottom Performers):** Uso de ordenação avançada e formatação para destacar claramente os segmentos de maior sucesso e os de maior risco.
+
+**4. Insight Analítico Gerado**
+Este dashboard eleva a discussão nas reuniões de diretoria. Ao comparar as despesas de cada componente contra a média global, os gestores param de discutir opiniões e passam a discutir fatos (ex: "O Componente X está 40% acima da nossa média de gastos, precisamos de uma auditoria lá"). A visão hierárquica por ano permite entender se um aumento de despesa é sazonal ou uma tendência perigosa de longo prazo, fornecendo a base de dados perfeita para a revisão do Planejamento Estratégico.
+
+#### 📸 Visão do Planejamento Financeiro
+
+<div align="center">
+  <img src="./Projeto05/Projeto05.png" alt="Dashboard de Finanças Corporativas" width="85%">
+</div>
+
+---
+
+### 📈 Projeto 06: Stock Market Analytics e Análise de Séries Temporais
+**Arquivos:** [`Dashboard (.pbix)`](./Projeto06/Projeto06.pbix) | [`Visualização do Dashboard (.png)`](./Projeto06/Projeto6.png)
+
+Este projeto representa um salto significativo em complexidade e aderência ao mundo real, utilizando **dados públicos extraídos diretamente da NASDAQ**. O dashboard foi desenvolvido para atuar como uma ferramenta de *Equity Research* (Pesquisa de Ações), monitorando a liquidez e a volatilidade de 5 gigantes do mercado: IBM, Microsoft, Oracle, Tesla e Walmart.
+
+**1. Contexto de Negócio**
+Investidores, analistas de portfólio e *traders* precisam monitorar constantemente o comportamento das ações para tomar decisões de compra ou venda. A dor de negócio aqui é a sobrecarga de informações: analisar a variação de preço e o volume de múltiplas empresas simultaneamente é exaustivo. O objetivo deste painel é fornecer um monitoramento ágil, permitindo comparar o desempenho histórico das ações e identificar tendências de forma automatizada.
+
+**2. Conceito Teórico Essencial**
+* **Séries Temporais (Time Series):** Sequência de pontos de dados indexados em ordem cronológica. Em Data Science, analisar o mercado de ações exige lidar com flutuações, sazonalidade e tendências ao longo do tempo.
+* **Métricas OHLC:** O padrão global de análise financeira para rastrear o preço de um ativo durante um período: *Open* (Abertura), *High* (Máxima), *Low* (Mínima) e *Close* (Fechamento).
+* **Variação Temporal (MoM - Month-over-Month):** O cálculo de como o preço de fechamento evolui em relação ao mês imediatamente anterior, modelado matematicamente como:
+  $$Varia\c{c}\tilde{a}o\ MoM = \frac{Fechamento_{M\hat{e}s\ Atual} - Fechamento_{M\hat{e}s\ Anterior}}{Fechamento_{M\hat{e}s\ Anterior}}$$
+
+**3. Aplicação Prática no Power BI**
+* **Extração de Dados Reais:** Conexão e tratamento de bases de dados reais da bolsa de valores (NASDAQ), lidando com a formatação estrita do mercado financeiro.
+* **Time Intelligence (DAX):** Uso de funções avançadas de inteligência de tempo no Power BI para calcular agregações móveis, médias mensais e variações temporais de forma dinâmica, independentemente do filtro aplicado.
+* **Análise de Liquidez e Volatilidade:** * Construção de gráficos de tendência para o Volume Negociado ao longo do tempo.
+  * Estruturação de Tabelas/Matrizes contendo os valores médios de *Open, High, Low e Close* consolidados por mês.
+  * Gráficos para monitorar a variação mês a mês do preço de fechamento.
+* **Filtros de Contexto Cruzado:** Implementação de segmentadores (*Slicers*) que permitem ao usuário isolar a análise para um único *ticker* (empresa) ou criar combinações personalizadas (ex: comparar apenas Tesla vs. Microsoft).
+* **Augmented Analytics (Narrativa Inteligente):** Implementação de algoritmos de *Natural Language Generation* nativos do Power BI para redigir resumos automáticos. O relatório "lê" o gráfico e escreve as principais características e tendências (picos, quedas e correlações) sem intervenção humana.
+
+**4. Insight Analítico Gerado**
+Este dashboard automatiza o trabalho de um analista júnior de investimentos. Através dos visuais dinâmicos e do DAX avançado, um gestor de fundos consegue rapidamente identificar qual ativo teve maior liquidez (volume) no último ano e analisar a volatilidade da variação de fechamento. A Narrativa Inteligente serve como um *briefing* imediato, poupando horas de redação de relatórios gerenciais e permitindo que o foco vá 100% para a estratégia de alocação de capital.
+
+#### 📸 Painel Analítico do Mercado de Ações
+
+<div align="center">
+  <img src="./Projeto06/Projeto6.png" alt="Dashboard do Mercado de Ações" width="85%">
+</div>
+
+---
