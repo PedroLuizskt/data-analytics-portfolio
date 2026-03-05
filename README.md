@@ -348,3 +348,39 @@ Este dashboard automatiza o trabalho de um analista júnior de investimentos. At
 </div>
 
 ---
+
+### 🧽 Lab 04: Data Cleansing, Qualidade de Dados e Tratamento de Outliers
+**Arquivos:** [`Arquivo (.pbix)`](./Lab04/Lab4.pbix)
+
+Este laboratório é um mergulho profundo na Engenharia de Dados dentro do ecossistema do Power BI (utilizando o Power Query e a Linguagem M). O foco abandona temporariamente a visualização de dados para focar na fundação de qualquer projeto analítico bem-sucedido: a **higienização e integridade da base de dados**.
+
+**1. Contexto de Negócio**
+A diretoria não pode tomar decisões baseadas em dados corrompidos. Valores ausentes podem subestimar o faturamento, registros duplicados podem inflar o número de clientes, e valores discrepantes (*outliers* — como um erro de digitação de uma venda de R$ 1.000.000,00 onde deveria ser R$ 1.000,00) destroem completamente o cálculo de médias e metas operacionais. O objetivo deste lab é atuar como um "Filtro de Qualidade", garantindo que apenas dados confiáveis cheguem à camada visual.
+
+**2. Conceito Teórico Essencial**
+* **Data Cleansing (Limpeza de Dados):** O processo de detectar e corrigir (ou remover) registros corrompidos, imprecisos ou irrelevantes de um *dataset*.
+* **Imputação de Dados Ausentes:** Estratégias estatísticas para lidar com valores nulos, decidindo entre a exclusão da linha ou a imputação (preenchimento com a média, mediana ou um valor constante).
+* **Detecção de Anomalias (Outliers):** Identificação de observações que se desviam drasticamente do padrão da amostra. Em estatística, frequentemente utilizamos o Método do Intervalo Interquartil (IQR) para definir as cercas de corte:
+  $$IQR = Q3 - Q1$$
+  $$Limite_{Superior} = Q3 + 1.5 \times IQR$$
+  $$Limite_{Inferior} = Q1 - 1.5 \times IQR$$
+
+**3. Aplicação Prática no Power BI**
+* **Remoção de Duplicadas (Deduplicação):** Uso do Power Query para identificar chaves primárias repetidas e garantir a unicidade dos registros de transação.
+* **Tratamento de Valores Ausentes (Null/Blank):** Aplicação de regras de substituição de valores e preenchimento condicional (*Fill Down/Up*) para tratar lacunas nos dados sem comprometer a volumetria da amostra.
+* **Identificação Visual e Filtragem de Outliers:** * Construção de gráficos de dispersão (*Scatter Plots*) e gráficos de caixa (*Boxplots*) para isolar visualmente os pontos fora da curva.
+  * Aplicação de filtros no nível de transformação (Power Query) ou usando DAX avançado para excluir matematicamente esses ruídos do cálculo das métricas principais.
+
+**4. Insight Analítico Gerado**
+A execução rigorosa destas três etapas constrói um modelo de dados blindado. O gestor que consome os painéis finais passa a ter **confiança absoluta** nos números. Ao tratar os outliers, por exemplo, o cálculo do "Ticket Médio" da empresa deixa de ser distorcido por anomalias sistêmicas, refletindo com precisão o verdadeiro comportamento de consumo da base de clientes.
+
+#### 📸 Etapas de Transformação e Limpeza
+
+<table align="center">
+  <tr>
+    <td align="center"><strong>Análise de Distribuição e Outliers</strong><br><img src="./Lab04/1.png" alt="Identificação de Outliers" width="100%"></td>
+    <td align="center"><strong>Tratamento e Higienização de Dados</strong><br><img src="./Lab04/2.png" alt="Tratamento de Dados" width="100%"></td>
+  </tr>
+</table>
+
+---
