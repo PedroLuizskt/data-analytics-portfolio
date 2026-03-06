@@ -384,3 +384,49 @@ A execução rigorosa destas três etapas constrói um modelo de dados blindado.
 </table>
 
 ---
+
+### 🧑‍💻 Lab 05: Engenharia de Atributos e Linguagem M Avançada (Power Query)
+**Arquivos:** [`Código M (.txt)`](./Lab05/Codigo_ajustado.txt) | [`Visualização do Editor (.png)`](./Lab05/1.png)
+
+Neste laboratório, o foco deixa de ser a visualização gráfica e mergulha nas entranhas do motor de dados do Power BI: o **Power Query e a Linguagem M**. O objetivo é demonstrar proficiência na construção de pipelines de ETL (Extract, Transform, Load) programáticos, focando em uma das etapas cruciais da Ciência de Dados: a Engenharia de Atributos (*Feature Engineering*).
+
+
+**1. Contexto de Negócio**
+Bases de dados brutas raramente estão prontas para análises avançadas ou algoritmos preditivos. Muitas vezes, as variáveis que realmente explicam o comportamento do cliente (como o Valor Real Pago ou o Peso do Nível de Fidelidade) não existem no sistema de origem; elas precisam ser criadas. Além disso, dados financeiros (como Limites de Crédito) costumam ser altamente distorcidos, o que pode enviesar análises de risco. O desafio é criar um script automatizado e reprodutível que prepare a base de clientes perfeitamente.
+
+**2. Conceito Teórico Essencial**
+* **Feature Engineering:** O processo de usar o conhecimento do negócio para extrair e criar novas variáveis (features) a partir de dados brutos, melhorando o poder preditivo de análises e modelos de Machine Learning.
+* **Transformação Logarítmica (Feature Scaling):** Em estatística, variáveis monetárias (como Limite de Crédito) costumam ter uma distribuição assimétrica (Right-Skewed). Aplicar o logaritmo reduz o impacto de valores extremos (outliers) sem deletá-los, estabilizando a variância:
+  $$x' = \log_{10}(x)$$
+* **Codificação Ordinal (Ordinal Encoding):** Transformar categorias de texto (Bronze, Prata, Ouro) em pesos numéricos, permitindo que algoritmos matemáticos e funções DAX interpretem a hierarquia de valor dos clientes.
+
+**3. Aplicação Prática no Power BI (Linguagem M)**
+O script M desenvolvido executa as seguintes etapas estruturadas:
+* **Data Cleansing e Imputação:** Localização e substituição de caracteres corrompidos (`?` substituído pela idade estimada `45`) usando `Table.ReplaceValue`.
+* **Redução de Dimensionalidade:** Remoção de colunas sem valor analítico ou preditivo para o modelo de negócio atual (`Table.RemoveColumns`).
+* **Feature Extraction (Derivação Matemática):** Criação da coluna `Valor Final`, subtraindo o desconto do valor original de compra linha a linha.
+* **String Manipulation:** Divisão da chave primária do cliente em Código e ID isolados usando `Table.SplitColumn` por posição.
+* **Feature Creation com Lógica Condicional:** Uso de `if / then / else` em M para criar pesos numéricos baseados na categoria do cliente (Diamante = 20, Ouro = 15, etc.).
+* **Normalização Estatística:** Aplicação da função matemática `Number.Log10` diretamente na coluna de Limite de Crédito para ajustar a escala da variável.
+
+**4. Insight Analítico Gerado**
+A execução deste pipeline garante que os dados de clientes cheguem ao modelo relacional não apenas limpos, mas enriquecidos estatisticamente. A codificação dos níveis de cliente e a normalização do limite de crédito preparam o terreno perfeitamente para que o Cientista de Dados possa, no futuro, plugar essa tabela em um modelo de *Clustering* (K-Means, por exemplo) em Python ou R para segmentação de clientes, sem a necessidade de reprocessar os dados.
+
+#### 💻 O Código Fonte (Linguagem M)
+
+Para fins de documentação rápida, abaixo está um trecho do pipeline desenvolvido no Editor Avançado:
+
+```powerquery
+let
+    Fonte = Csv.Document(...),
+    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+    // Imputação de dados corrompidos
+    #"Valor Substituido" = Table.ReplaceValue(#"Tipo Alterado","?","45",Replacer.ReplaceText,{"Idade"}),
+    // Feature Engineering: Criação de Valor Final
+    #"Coluna Adicionada" = Table.AddColumn(#"Coluna Removida", "Valor Final", each [Valor Compra] - [Valor Desconto]),
+    // Codificação Ordinal Condicional
+    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Colunas Renomeadas", "% Desconto Especial", each if [Tipo de Cliente] = "Bronze" then 5 else if [Tipo de Cliente] = "Prata" then 10 else if [Tipo de Cliente] = "Ouro" then 15 else if [Tipo de Cliente] = "Diamante" then 20 else 0),
+    // Transformação Logarítmica para Machine Learning
+    #"Logaritmo de Base 10 Calculado" = Table.TransformColumns(#"Coluna Condicional Adicionada",{{"Limite de Credito", Number.Log10, type number}})
+in
+    #"Logaritmo de Base 10 Calculado"
