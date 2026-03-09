@@ -430,3 +430,36 @@ let
     #"Logaritmo de Base 10 Calculado" = Table.TransformColumns(#"Coluna Condicional Adicionada",{{"Limite de Credito", Number.Log10, type number}})
 in
     #"Logaritmo de Base 10 Calculado"
+
+```
+
+---
+
+### 🗄️ Lab 06: Arquitetura de Dados, Conexões ODBC e Integração com SQL
+**Arquivos:** [`Visualização do Modelo de Dados (.png)`](./Lab06/1.png)
+
+Embora visualmente direto, este laboratório aborda um dos pilares mais críticos do dia a dia de um profissional de dados: a **conectividade de sistemas e a automação de fluxos de dados (Data Pipelines)**. O foco aqui não é a construção de gráficos, mas sim a engenharia necessária para plugar o Power BI diretamente em um Banco de Dados Relacional através de uma interface ODBC, utilizando SQL nativo para otimizar a extração.
+
+
+
+**1. Contexto de Negócio**
+Em ambientes corporativos reais, os dados não chegam em arquivos `.csv` organizados. Eles residem em bancos de dados complexos (ERPs, CRMs, sistemas logísticos). A dor de negócio aqui é o atraso na informação: depender da equipe de TI para exportar relatórios manuais gera gargalos. O objetivo deste laboratório é dar autonomia ao analista, permitindo que ele crie uma conexão direta, segura e automatizada com o servidor da empresa para alimentar o dashboard.
+
+**2. Conceito Teórico Essencial**
+* **ODBC (Open Database Connectivity):** Um padrão da indústria (middleware) que atua como um tradutor universal, permitindo que aplicações (como o Power BI) conversem com praticamente qualquer Sistema Gerenciador de Banco de Dados (SGBD), seja ele SQL Server, PostgreSQL, MySQL ou Oracle.
+* **Projeção Relacional (SQL):** A boa prática de engenharia de dados dita que você nunca deve importar uma tabela inteira se não for usar todas as colunas. O uso do comando `SELECT` com colunas específicas minimiza o tráfego de rede e o consumo de memória RAM, um conceito fundamental para o *Query Folding* e performance de relatórios.
+
+**3. Aplicação Prática no Power BI**
+* **Configuração de DSN (Data Source Name):** Parametrização dos drivers ODBC no sistema operacional para mapear o caminho do banco de dados alvo.
+* **Extração via Query SQL Nativa:** Em vez de usar a interface gráfica do Power Query para selecionar colunas (o que traria a tabela inteira para a memória antes de filtrar), a extração foi otimizada injetando a seguinte instrução SQL diretamente na conexão da fonte:
+  ```sql
+  SELECT 
+      id_cliente, 
+      cidade, 
+      estado, 
+      pais 
+  FROM TB_DSA_CLIENTES;
+  ```
+
+  ---
+  
