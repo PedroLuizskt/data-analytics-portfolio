@@ -467,4 +467,58 @@ A implementação desta arquitetura transforma um relatório estático em um sis
   
 ---
 
+### 🤖 Lab 07: Machine Learning, Python e Integração com Power BI (Clustering)
+**Arquivos:** [`Notebook Python (.ipynb)`](./Lab07/Lab7.ipynb) | [`Dashboard (.pbix)`](./Lab07/Lab07.pbix) | [`Visualização do Relatório (.png)`](./Lab07/1.png)
+
+Este laboratório é um divisor de águas no portfólio, marcando a integração completa entre a **Ciência de Dados (Python/Scikit-Learn)** e a **Visualização de Dados (Power BI)**. O projeto foi desenvolvido inteiramente em um ambiente Jupyter Notebook, onde um modelo de *Machine Learning* foi treinado para segmentar clientes e, em seguida, o Power BI foi instanciado diretamente no código Python para renderizar os resultados.
+
+**1. Contexto de Negócio**
+O time de Marketing possui uma base histórica com a idade, renda anual e pontuação de gastos (poder de compra) dos clientes. O problema é que campanhas de marketing em massa (tratando todos os clientes da mesma forma) têm baixo ROI (Retorno sobre Investimento). O gestor solicitou a criação de **3 clusters (segmentos)** de clientes com comportamentos similares para que a empresa possa personalizar ofertas, otimizar o orçamento de mídia e aumentar a conversão.
+
+**2. Conceito Teórico Essencial**
+* **Aprendizado Não Supervisionado (K-Means Clustering):** Um algoritmo de *Machine Learning* que agrupa dados não rotulados baseando-se na similaridade (distância) entre eles. O algoritmo encontra os centroides ideais para separar os clientes em $k$ grupos distintos.
+* **Feature Scaling (Padronização):** Como o K-Means calcula distâncias matemáticas (Euclidianas), variáveis com grandezas muito diferentes (ex: Idade de 25 anos vs. Renda de R$ 130.000) distorcem o modelo. Utilizamos o `StandardScaler` para aplicar o *Z-score normalization*, garantindo que todas as variáveis tenham peso igual:
+  $$z = \frac{x - \mu}{\sigma}$$
+  *(Onde $\mu$ é a média e $\sigma$ é o desvio padrão da amostra).*
+
+**3. Aplicação Prática (Python + Power BI)**
+* **Pré-Processamento (Pandas & Scikit-Learn):** Carregamento do dataset via `pandas`, análise estatística descritiva e aplicação do `StandardScaler` para normalizar as colunas numéricas.
+* **Modelagem Preditiva:** Instanciação e treinamento do modelo `KMeans(n_clusters=3)` sobre os dados padronizados, extraindo os rótulos (`labels_`) e devolvendo-os ao DataFrame original como uma nova coluna categórica de identificação do segmento.
+* **Power BI via Código (powerbiclient):** Uso inovador da biblioteca oficial da Microsoft no Python para contornar a necessidade do Power BI Desktop. 
+  * Autenticação via `DeviceCodeLoginAuthentication`.
+  * Geração instantânea de um painel exploratório (`QuickVisualize`) injetando o DataFrame clusterizado diretamente no motor do Power BI Service a partir da célula do Jupyter Notebook.
+
+**4. Insight Analítico Gerado**
+A segmentação revelou os perfis exatos da base de clientes. O Marketing agora tem 3 personas claras e acionáveis, acompanhadas de suas respectivas médias de Idade, Renda e Pontuação de Gastos. Isso permite, por exemplo, criar campanhas de produtos *Premium* exclusivas para o cluster de alta renda e alta pontuação, enquanto elabora estratégias de retenção ou fidelidade para os clusters de menor engajamento, cortando desperdícios operacionais.
+
+#### 💻 Snippet de Integração (Jupyter Notebook)
+
+Abaixo, um trecho da elegância do código combinando *Scikit-Learn* e *Power BI*:
+
+```python
+# 1. Treinamento do Modelo de Machine Learning
+kmeans = KMeans(n_clusters=3)
+kmeans.fit(dados_padronizados)
+df_dsa['cluster'] = kmeans.labels_ # Atribui o segmento a cada cliente
+
+# 2. Instanciação do Power BI dentro do Jupyter Notebook
+from powerbiclient import QuickVisualize, get_dataset_config
+from powerbiclient.authentication import DeviceCodeLoginAuthentication
+
+device_auth = DeviceCodeLoginAuthentication()
+relatorio_PBI = QuickVisualize(get_dataset_config(df_dsa), auth=device_auth)
+
+# 3. Renderiza o relatório interativo na célula
+relatorio_PBI
+
+```
+
+#### 📸 Relatório de Segmentação de Clientes Gerado
+
+<div align="center">
+  <img src="./Lab07/1.png" alt="Segmentação de Clientes para Área de Marketing" width="85%">
+</div>
+
+---
+
 
