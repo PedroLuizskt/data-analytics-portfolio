@@ -521,4 +521,63 @@ relatorio_PBI
 
 ---
 
+### 🚨 Lab 08: Detecção de Anomalias Financeiras com R e Power BI (Fraud Detection)
+**Arquivos:** [`Código R (.R)`](./Lab08/Lab8.R) | [`Dashboard (.pbix)`](./Lab08/Lab8.pbix) | [`Visualização do Relatório (.png)`](./Lab08/1.png)
+
+Este laboratório eleva a maturidade analítica ao integrar estatística computacional avançada (**Linguagem R**) com a camada de visualização interativa do **Power BI**. O foco do projeto é a identificação de fraudes em transações financeiras utilizando algoritmos de *Machine Learning* baseados em árvores (Isolation Forest) para um cenário onde o negócio não possuía dados previamente rotulados.
+
+
+**1. Contexto de Negócio**
+Uma instituição financeira possui um histórico massivo de transações, mas a diretoria suspeita que fraudes estão ocorrendo e passando despercebidas. O grande desafio analítico (muito comum no mundo real) é que o banco não tem uma flag dizendo "isso é fraude" ou "isso é normal". O gestor precisa de um sistema autônomo que identifique matematicamente comportamentos suspeitos para que a equipe de auditoria saiba exatamente onde focar seus esforços, reduzindo perdas financeiras.
+
+**2. Conceito Teórico Essencial**
+* **Detecção de Anomalias (Anomaly Detection):** Ramo do aprendizado não supervisionado focado em identificar instâncias raras que diferem significativamente da maioria dos dados.
+* **Isolation Forest (Floresta de Isolamento):** Ao contrário de algoritmos que tentam modelar o que é "normal", o *Isolation Forest* isola explicitamente as anomalias. Como fraudes são raras e têm atributos muito diferentes, elas são isoladas mais rapidamente (mais perto da raiz da árvore de decisão).
+* **Definição de Threshold (Limiar de Corte):** Após a pontuação do algoritmo (*Anomaly Score*), é necessário definir um limite matemático para classificar o status da transação com base na análise de densidade da distribuição:
+  $$Status(x) = \begin{cases} \text{Anomalia}, & \text{se } Score > 0.62 \\ \text{Normal}, & \text{se } Score \le 0.62 \end{cases}$$
+
+**3. Aplicação Prática (Linguagem R + Power BI)**
+* **Modelagem e Predição (R Script):** * Uso do pacote `solitude` para instanciar e treinar o modelo `isolationForest$new()`.
+  * Criação de gráficos de densidade (`plot(density(...))`) e *Boxplots* via `ggplot2` para entender a distribuição das pontuações e definir a regra de negócio rigorosa (Score > 0.62).
+  * Feature Engineering: Criação da coluna categórica `status` usando `ifelse` via pacote `dplyr`, carimbando as transações suspeitas.
+* **Integração Visual (Power BI):** O *dataset* limpo e pontuado pelo modelo (`previsoes_novos_dados.csv`) foi injetado no Power BI. A ferramenta foi utilizada para transformar a saída matemática do R em um dashboard executivo e interativo, usando *Scatter Plots* (Gráficos de Dispersão) para evidenciar visualmente o distanciamento dos pontos anômalos em relação aos *clusters* de transações normais.
+
+**4. Insight Analítico Gerado**
+A empresa deixou de operar às cegas. O time de prevenção a fraudes não precisa mais auditar milhares de transações aleatórias. O modelo apontou exatamente quais transações (Score > 0.62) quebram o padrão de comportamento esperado. O cruzamento do R com o Power BI entregou um painel onde o gestor pode filtrar rapidamente as anomalias, bloquear cartões preventivamente e economizar milhões em estornos (chargebacks).
+
+#### 💻 Snippet de Modelagem (Linguagem R)
+
+Abaixo, um trecho da lógica estatística aplicada para isolar as fraudes:
+
+```R
+# 1. Instanciação e Treinamento do Modelo Isolation Forest
+library(solitude)
+library(dplyr)
+
+modelo_ml_dsa = isolationForest$new() 
+modelo_ml_dsa$fit(dados_historicos_dsa)
+
+# 2. Previsão do Anomaly Score em novos dados
+previsoes_novos_dados = modelo_ml_dsa$predict(novos_dados_dsa)
+
+# 3. Engenharia de Atributos: Classificação baseada no Limiar (Threshold)
+previsoes_novos_dados <- previsoes_novos_dados %>%
+  mutate(anomaly_score = round(anomaly_score, 2)) %>%
+  mutate(status = ifelse(anomaly_score > 0.62, "anomalia", "normal"))
+
+```
+
+#### 📸 Painel de Detecção de Anomalias
+
+<div align="center">
+  <img src="./Lab08/1.png" alt="Detecção de Anomalias" width="85%">
+</div>
+
+
+---
+
+
+
+
+
 
