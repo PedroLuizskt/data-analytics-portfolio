@@ -608,6 +608,33 @@ Este painel atua como um sistema de **Manutenção Preditiva e Planejamento**. E
 
 ---
 
+## 🌐 Considerações Finais e Evolução Contínua
+
+Este portfólio é um ecossistema vivo que documenta a minha transição do Business Intelligence tradicional para a **Ciência de Dados Aplicada e Advanced Analytics**. 
+
+A principal premissa de todo o trabalho aqui exposto é que ferramentas (como Power BI, SQL, Python ou R) são apenas o meio condutor. O verdadeiro valor de um profissional de dados está na sua capacidade de fazer as perguntas certas, garantir a integridade da informação (Data Cleansing) e entregar soluções que impactem diretamente o **faturamento, a redução de custos e a eficiência operacional** de uma organização.
+
+A jornada não termina aqui. Os próximos passos envolvem o aprofundamento em arquiteturas de Big Data, orquestração de pipelines em nuvem (Cloud Computing) e o desenvolvimento de modelos preditivos ainda mais complexos integrados ao ambiente de negócios.
+
+---
+
+## 📚 Referências e Agradecimentos
+
+O embasamento técnico e teórico para a construção deste repositório foi consolidado através de formações de excelência e horas de prática intensiva. Deixo aqui o meu reconhecimento às instituições que guiaram esse aprendizado:
+
+* **Data Science Academy (DSA):** Pela base rigorosa em Business Analytics, Estatística, Machine Learning e integração de R/Python com Power BI.
+* **Klabin & DIO (Digital Innovation One):** Pelos bootcamps de Análise de Dados, desafios práticos e nivelamento em modelagem relacional e SQL.
+
+---
+
+## 🤝 Vamos nos Conectar?
+
+Se você é um recrutador buscando um profissional orientado a negócios, um gestor precisando otimizar os dados da sua empresa, ou um colega da área de tecnologia querendo trocar experiências, sinta-se à vontade para entrar em contato:
+
+* **LinkedIn:** [https://www.linkedin.com/in/pedro-luiz-rodrigues-vaz-de-melo/]
+* **GitHub:** [PedroLuizskt](https://github.com/PedroLuizskt)
+
+> *"Sem dados, você é apenas mais uma pessoa com uma opinião."* — W. Edwards Deming
 
 
 
