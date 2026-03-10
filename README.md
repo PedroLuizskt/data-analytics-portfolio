@@ -460,6 +460,11 @@ Em ambientes corporativos reais, os dados não chegam em arquivos `.csv` organiz
       pais 
   FROM TB_DSA_CLIENTES;
   ```
+Modelagem de Dados (Model View): Após a carga, a tabela dimensional de clientes foi disponibilizada na exibição de modelo (Model View) do Power BI, pronta para ser relacionada (via chave primária id_cliente) a futuras tabelas de fatos (como vendas ou entregas).
 
-  ---
+4. Insight Analítico Gerado
+A implementação desta arquitetura transforma um relatório estático em um sistema vivo. Ao usar ODBC e SQL, garantimos a Governança dos Dados: a lógica de extração fica documentada e o Power BI passa a refletir automaticamente qualquer nova inserção no banco de dados corporativo a cada atualização (Refresh), eliminando o erro humano da manipulação manual de arquivos.
   
+---
+
+
