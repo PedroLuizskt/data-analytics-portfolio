@@ -576,6 +576,37 @@ previsoes_novos_dados <- previsoes_novos_dados %>%
 
 ---
 
+### 🏭 Lab 09: Manufacturing Analytics, Forecasting e Detecção de Anomalias
+**Arquivos:** [`Dashboard (.pbix)`](./Lab09/Lab9.pbix) | [`Visualização do Relatório (.png)`](./Lab09/1.png)
+
+Este laboratório encerra a trilha de testes práticos mergulhando no setor industrial (Engenharia de Produção / Indústria 4.0). O foco absoluto deste projeto é a manipulação avançada de **Séries Temporais (Time Series)** e a aplicação de algoritmos nativos de Inteligência Artificial do Power BI para prever o volume de produção futura e detectar gargalos ou falhas anômalas na linha de montagem.
+
+
+
+**1. Contexto de Negócio**
+O Gerente de Planta (Plant Manager) e os Engenheiros de Produção precisam garantir que a fábrica opere com eficiência máxima. Se a produção de unidades cair drasticamente sem aviso prévio (uma anomalia), isso pode indicar a quebra de uma máquina ou falta de matéria-prima. Da mesma forma, para planejar a logística e o estoque, o negócio não pode apenas olhar para o passado; é necessário prever matematicamente a média de unidades que serão produzidas nos próximos meses.
+
+**2. Conceito Teórico Essencial**
+* **Time Series Forecasting (Previsão de Séries Temporais):** O uso de modelos matemáticos (como *Exponential Smoothing* ou *ARIMA*) para analisar tendências passadas e prever valores futuros. Na modelagem clássica, uma série temporal ($Y_t$) é decomposta em três fatores:
+  $$Y_t = T_t + S_t + R_t$$
+  *(Onde $T$ é a Tendência, $S$ é a Sazonalidade e $R$ é o Ruído/Anomalia).*
+* **Intervalo de Confiança (Confidence Interval):** Na Ciência de Dados, previsões nunca são absolutas. O modelo gera uma faixa de probabilidade (ex: 95% de chance) de que a produção futura flutuará entre um limite superior e um limite inferior.
+
+**3. Aplicação Prática no Power BI**
+* **Engenharia de Tempo:** Manipulação de eixos temporais contínuos para garantir que os algoritmos de IA do Power BI consigam ler a cronologia da produção sem quebras.
+* **Forecasting (Previsão Nativa):** Implementação do recurso de Previsão (*Forecast*) no gráfico de linhas, parametrizando a sazonalidade, o tamanho do horizonte de previsão (quantos pontos no futuro prever) e o grau do intervalo de confiança (área sombreada no gráfico).
+* **Detecção de Anomalias (Anomaly Detection):** Configuração da IA de detecção de anomalias do Power BI para rastrear o histórico de "Média de Unidades Produzidas". O algoritmo marca automaticamente picos (outliers positivos) e quedas (outliers negativos) que fogem matematicamente do padrão esperado.
+
+**4. Insight Analítico Gerado**
+Este painel atua como um sistema de **Manutenção Preditiva e Planejamento**. Em vez de o engenheiro de produção ser pego de surpresa por um lote atrasado, a IA destaca visualmente as anomalias no momento em que elas ocorrem, permitindo uma investigação imediata na máquina defeituosa. A linha de previsão futura capacita o setor de Suprimentos (*Supply Chain*) a comprar matéria-prima na quantidade exata e no tempo certo, operando em um verdadeiro modelo *Just-in-Time*.
+
+#### 📸 Painel de Controle de Produção (Forecasting & Anomalias)
+
+<div align="center">
+  <img src="./Lab09/1.png" alt="Dashboard de Forecasting e Anomalias na Produção" width="85%">
+</div>
+
+---
 
 
 
