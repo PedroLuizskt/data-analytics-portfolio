@@ -219,9 +219,7 @@ O Diretor de RH (CHRO) precisa de um panorama exato da força de trabalho atual 
 
 **2. Conceito Teórico Essencial**
 * **People Analytics & Demografia Organizacional:** Estudo do comportamento, experiência e distribuição demográfica da força de trabalho para otimizar a gestão de talentos.
-* **Feature Engineering (Transformação de Variáveis Contínuas em Categóricas):** O processo de pegar um número absoluto (ex: Anos desde a última promoção) e transformá-lo em uma classe de decisão (Elegível / Não Elegível). Em estatística e programação, representamos essa lógica condicional (*Step Function*) da seguinte forma:
-  $$Promo\c{c}\tilde{a}o(x) = \begin{cases} \text{Considerar Promo\c{c}\tilde{a}o}, & \text{se } x \ge 5 \\ \text{N\tilde{a}o Considerar}, & \text{se } x < 5 \end{cases}$$
-  *(Onde $x$ é o número de anos desde a última promoção).*
+* **Feature Engineering (Transformação de Variáveis Contínuas em Categóricas):** O processo de pegar um número absoluto (ex: Anos desde a última promoção) e transformá-lo em uma classe de decisão (Elegível / Não Elegível). 
 
 **3. Aplicação Prática no Power BI**
 * **Arquitetura de Medidas (Measures Table):** Abandono da prática amadora de espalhar medidas pelas tabelas do modelo. Criação de uma tabela virtual dedicada exclusivamente para centralizar e organizar o código DAX, facilitando a manutenção do sistema.
