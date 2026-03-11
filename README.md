@@ -530,8 +530,7 @@ Uma instituição financeira possui um histórico massivo de transações, mas a
 **2. Conceito Teórico Essencial**
 * **Detecção de Anomalias (Anomaly Detection):** Ramo do aprendizado não supervisionado focado em identificar instâncias raras que diferem significativamente da maioria dos dados.
 * **Isolation Forest (Floresta de Isolamento):** Ao contrário de algoritmos que tentam modelar o que é "normal", o *Isolation Forest* isola explicitamente as anomalias. Como fraudes são raras e têm atributos muito diferentes, elas são isoladas mais rapidamente (mais perto da raiz da árvore de decisão).
-* **Definição de Threshold (Limiar de Corte):** Após a pontuação do algoritmo (*Anomaly Score*), é necessário definir um limite matemático para classificar o status da transação com base na análise de densidade da distribuição:
-  $$Status(x) = \begin{cases} \text{Anomalia}, & \text{se } Score > 0.62 \\ \text{Normal}, & \text{se } Score \le 0.62 \end{cases}$$
+* **Definição de Threshold (Limiar de Corte):** Após a pontuação do algoritmo (*Anomaly Score*), é necessário definir um limite matemático para classificar o status da transação com base na análise de densidade da distribuição.
 
 **3. Aplicação Prática (Linguagem R + Power BI)**
 * **Modelagem e Predição (R Script):** * Uso do pacote `solitude` para instanciar e treinar o modelo `isolationForest$new()`.
