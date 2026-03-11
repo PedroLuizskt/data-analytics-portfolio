@@ -291,8 +291,7 @@ A diretoria financeira (CFO) quer ir além do simples fechamento contábil. Para
 
 **2. Conceito Teórico Essencial**
 * **Análise de Variância (Variance Analysis):** A prática de comparar o desempenho atual contra um *baseline* (como uma média histórica, orçamento ou meta) para identificar desvios operacionais.
-* **Rentabilidade (Profitability):** Modelagem matemática da eficiência do negócio. A margem é calculada dinamicamente via DAX:
-  $$Margem\ de\ Lucro\ (\%) = \frac{\sum Receitas - \sum Despesas}{\sum Receitas}$$
+* **Rentabilidade (Profitability):** Modelagem matemática da eficiência do negócio. A margem é calculada dinamicamente via DAX.
 * **Estrutura de Dados Hierárquica:** Organização de categorias financeiras em níveis (ex: Nível 1: Tipo -> Nível 2: Componente), permitindo o aprofundamento analítico (Drill-down).
 
 **3. Aplicação Prática no Power BI**
